@@ -38,11 +38,16 @@ $(function () {
     // Create platforms
     // You must decide the x position, y position, width, and height of the platforms
     // example usage: createPlatform(x,y,width,height)
-          createPlatform(290,620,60,10); // jump 1
-          createPlatform(470,590,60,10);// 2
-          createPlatform(470,590,60,10);
-          createPlatform(290,500,60,10);
-          createPlatform(510, 460,60,10);
+          createPlatform(300,620,60,10); // jump 1
+          createPlatform(500,590,60,10);// 2
+          createPlatform(650,520,60,10);//3
+          createPlatform(400, 440, 20, 10);// collectable pf
+         
+          createPlatform(705, 500, 10, 30);//stairs
+         createPlatform(710, 500, 50, 10);
+         createPlatform(750, 480, 10, 30);
+         createPlatform(750, 480, 800, 10);
+         createPlatform(1299, 440,10, 50 )
 
     // TODO 2
     // Create collectables
@@ -59,6 +64,7 @@ $(function () {
     // Your wall choices are: 'top' 'left' 'right' and 'bottom'
     // example usage: createCannon(side, position, delay, width, height)
       createCannon("right", 800, 1000, 40,20);
+      createCannon("top", 1300, 500, 40, 20);
 
     /////////////////////////////////////////////////
     //////////ONLY CHANGE ABOVE THIS POINT///////////
