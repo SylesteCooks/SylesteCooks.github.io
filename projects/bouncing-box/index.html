@@ -7,6 +7,7 @@
 	<script src="jquery.min.js"></script>
 	<style>
 		.box {
+			
 			width: 70px;
 			height: 70px;
 			background-color: rgb(240, 177, 196);
@@ -22,6 +23,7 @@
 
 		.board {
 			height: 100vh;
+			background-color: aquamarine;
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -31,7 +33,6 @@
 <body class="board">
 	<!-- HTML for the box -->
 	<div class="box">?</div>
-
 	<script>
 		(function () {
 			'use strict'
@@ -52,8 +53,9 @@
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
+			function moveBoxTo(newPositionX, newPositionY) {
 				box.css("left", newPositionX);
+				box.css("top", newPositionY);
 			}
 
 			// changes the text displayed on the Box
@@ -69,6 +71,9 @@
 			var positionX = 0;
 			var points = 0;
 			var speed = 10;
+			var positionY = 0;
+			var speedY = 10;
+			var boardHeight = jQuery(window).height();
 
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -78,7 +83,8 @@
 			function update() {
 				// Code should increase by 10 HERE //
 				positionX = positionX + speed;
-				moveBoxTo(positionX);
+				positionY = positionY + speed;
+				moveBoxTo(positionX, positionY);
 			if (positionX > boardWidth){
 				speed = -speed
 			}
