@@ -4,6 +4,7 @@ body {
 
 canvas {
   background-color: lightblue;
+  background-image: url("images/download.jpeg");
   margin: 20px;
 }
 
