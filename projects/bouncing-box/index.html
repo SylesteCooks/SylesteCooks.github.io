@@ -24,6 +24,10 @@
 		.board {
 			height: 100vh;
 			background-image: url("img/forest.jpeg");
+			-webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -85,12 +89,15 @@
 				positionX = positionX + speed;
 				positionY = positionY + speedY;
 				moveBoxTo(positionX, positionY);
-			if (positionX > boardWidth){
+			if (positionX > boardWidth - 5){
 				speed = -speed
-			}else if (positionX < 0) {
-				speed = speed + 3;
+			}if (positionX < 0) {
+				speed = -speed;
 			}
-			if (positionY > boardHeight){
+			if (positionY > boardHeight - 10){
+					speedY = -speedY;
+			}
+			if(positionY < 0){
 					speedY = -speedY;
 			}
 			};
@@ -103,7 +110,7 @@
 			function handleBoxClick() {
 					points = points + 1;
 					positionX = 0;
-					positionY = math.random(100);
+					positionY = 10;
 			changeBoxText(points);
 			if (speed >= 0){
 					speed += 3;
