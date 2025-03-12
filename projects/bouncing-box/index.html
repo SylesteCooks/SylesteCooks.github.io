@@ -23,7 +23,7 @@
 
 		.board {
 			height: 100vh;
-			background-color: aquamarine;
+			background-image: url("img/forest.jpeg");
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -83,13 +83,15 @@
 			function update() {
 				// Code should increase by 10 HERE //
 				positionX = positionX + speed;
-				positionY = positionY + speed;
+				positionY = positionY + speedY;
 				moveBoxTo(positionX, positionY);
 			if (positionX > boardWidth){
 				speed = -speed
-			}
-			if (positionX < 0) {
+			}else if (positionX < 0) {
 				speed = speed + 3;
+			}
+			if (positionY > boardHeight){
+					speedY = -speedY;
 			}
 			};
 
@@ -99,12 +101,14 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-			points = points + 1;
+					points = points + 1;
+					positionX = 0;
+					positionY = math.random(100);
 			changeBoxText(points);
 			if (speed >= 0){
-				speed += 3;
+					speed += 3;
 			} else if (speed <= -1){
-				speed -= 3;
+					speed -= 3;
 			}
 
 			};
