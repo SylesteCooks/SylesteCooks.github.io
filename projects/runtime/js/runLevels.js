@@ -34,7 +34,70 @@ var runLevels = function (window) {
     createObstacles(700, groundY - 50, 25, 10);
     createObstacles(1000, groundY - 50, 25, 50);
 
- 
+    function createEnemy (x, y){
+      var enemy = game.createGameItem("enemy", 25);// creates enemy game item and adds it to the game
+      var redSquare = draw.rect(50, 50, "red");//creates a red square and stores it in the varibale redSquare
+      redSquare.x = -25;//offsets the image from the hitzone by -25 pixels
+      redSquare.y = -25;//offsets the imgage from the hitzone by -25 pixels
+      enemy.addChild(redSquare);// adds the red square as achild to the enemy variable
+      enemy.x = x;// x position of enemy
+      enemy.y =y;// y position of enemy
+      game.addGameItem(enemy);// adds the enemy to the game
+      enemy.velocityX -= 3;// controls how fast the enemy moves on the x axis
+      enemy.rotationalVelocity = 3;// sets the rotational velcity of the enemy
+      enemy.onPlayerCollision = function () {
+        game.changeIntegrity(-10)// subtracts 10 health from hallebots HUD
+      };
+      enemy.onProjectileCollision = function (){
+        game.increaseScore(100);// increases score when Halle shoots the enemy
+        enemy.fadeOut();// enemy fades out when Halle shoots enemy
+        //shrink()// causes the enemy to shrinks when Halle shoots
+        //flyTo(x,y)// enemy moves to x and y positon when Halle shoots it
+      }
+    }
+    createEnemy(400, groundY - 50)
+    createEnemy(700, groundY - 50)
+    createEnemy(1300, groundY - 50)
+
+    function createReward (x, y, speed, health){
+      var reward = game.createGameItem("reward", 25);// creates reward game item and adds it to the game
+      var blueSquare = draw.rect(50, 50, "blue");//creates a blue square and stores it in the varibale blueSquare
+      blueSquare.x = -25;//offsets the image from the hitzone by -25 pixels
+      blueSquare.y = -25;//offsets the imgage from the hitzone by -25 pixels
+      reward.addChild(blueSquare);// adds the blue square as achild to the enemy variable
+      reward.x = x;// x position of reward
+      reward.y =y;// y position of reward
+      game.addGameItem(reward);// adds the reward to the game
+      reward.velocityX -= speed;// controls how fast the reward moves on the x axis
+      reward.rotationalVelocity = 3;// sets the rotational velcity of the reward
+      reward.onPlayerCollision = function () {
+        game.increaseScore(50);// increases score when Halle shoots the enemy
+        game.changeIntegrity(health)// subtracts 10 health from hallebots HUD
+        reward.shrink()// causes the reward to shrinks when Halle shoots
+      };
+    }
+
+     createReward(500, groundY - 100, 3, + 50);
+    
+    function createLevel (x, y, speed){
+      var reward = game.createGameItem("reward", 25);// creates reward game item and adds it to the game
+      var yellowSquare = draw.rect(50, 50, "yellow");//creates a yellow square and stores it in the varibale yellowSquare
+      yellowSquare.x = -25;//offsets the image from the hitzone by -25 pixels
+      yellowSquare.y = -25;//offsets the imgage from the hitzone by -25 pixels
+      reward.addChild(yellowSquare);// adds the yellow square as achild to the enemy variable
+      reward.x = x;// x position of reward
+      reward.y =y;// y position of reward
+      game.addGameItem(reward);// adds the reward to the game
+      reward.velocityX -= speed;// controls how fast the reward moves on the x axis
+      reward.rotationalVelocity = 3;// sets the rotational velcity of the reward
+      reward.onPlayerCollision = function () {
+        reward.shrink()// causes the reward to shrinks when Halle shoots
+        startLevel();
+      };
+    }
+
+      createLevel(1500, groundY - 30, 3)
+
 
     function startLevel() {
       // TODO 13 goes below here
