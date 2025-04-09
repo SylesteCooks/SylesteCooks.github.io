@@ -18,21 +18,19 @@ var runLevels = function (window) {
 
     // TODOs 5 through 11 go here
     // BEGIN EDITING YOUR CODE HERE
-    function createObstacles (x, y, hitSize, damage){
+    function createObstacles (x, y, hitSize, damage, image){
       var hitZoneSize = hitSize;//define the size of the hitzone and assign it to a variable
       var damageFromObstacle = damage;//defines the amount of damage obstacle causes and assign it to variable
       var obstacleHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);//creates the obstacle hitzone using the size and dama   ge as parameters and assigns it to a variable 
       obstacleHitZone.x = x;// sets the x cordinate of the obstacle
       obstacleHitZone.y = y;//sets the y positon of the obstacle
       game.addGameItem(obstacleHitZone);//adds the obstacle hitzone to the game
-      var obstacleImage = draw.bitmap("img/sawblade.png");//draws the obstacle image bitmap and store it in obstacleImage
+      var obstacleImage = draw.bitmap(image);//draws the obstacle image bitmap and store it in obstacleImage
       obstacleHitZone.addChild(obstacleImage);//attaches the images to the obstacle hitzone
       obstacleImage.x = -25;//position the image in the hitzone by moving x values left 25 pixels
       obstacleImage.y = -25;//posiition the image on the hozone by moving the y up 25 pixels
     }
-    createObstacles(400, groundY - 50, 25, 10);
-    createObstacles(700, groundY - 50, 25, 10);
-    createObstacles(1000, groundY - 50, 25, 50);
+    
 
     function createEnemy (x, y){
       var enemy = game.createGameItem("enemy", 25);// creates enemy game item and adds it to the game
@@ -55,9 +53,7 @@ var runLevels = function (window) {
         //flyTo(x,y)// enemy moves to x and y positon when Halle shoots it
       }
     }
-    //createEnemy(400, groundY - 50)
-    //createEnemy(700, groundY - 50)
-    //createEnemy(1300, groundY - 50)
+
 
     function createReward (x, y, speed, health){
       var reward = game.createGameItem("reward", 25);// creates reward game item and adds it to the game
@@ -77,7 +73,7 @@ var runLevels = function (window) {
       };
     }
 
-     //createReward(500, groundY - 100, 3, + 50);
+    
     
     function createLevel (x, y, speed, health){
       var level = game.createGameItem("level", 25);// creates level game item and adds it to the game
@@ -97,17 +93,30 @@ var runLevels = function (window) {
       };
     }
 
-      createLevel(1500, groundY - 30, 3, 100);
+     
 
 
     function startLevel() {
       // TODO 13 goes below here
         var level = levelData[currentLevel];//fetches the current level from the levelData array and stores it in the level variable
-        var levelObjects = level.gameItems;//retrienve the array of game items and stores it in levelObject
+        var levelObjects = level.gameItems//retrienve the array of game items and stores it in levelObject
 
-        for(var i = 0;){
+        for(var i =0; i < levelObjects.length; i++){
+            var element = levelObjects[i];
 
+           if (element.type === "sawblade"){// check the type key-value of the gameItems object to determine which objects to manifest
+            createObstacles(element.x, element.y, element.hitSize, element.damage, element.image);// if the condition is true it will call the revelent function
         }
+        if (element.type === "enemy"){// check the type key-value of the gameItems object to determine which objects to manifest
+          createEnemy(element.x, element.y, element.speed, element.health);// if the condition is true it will call the revelent function
+      }
+      if (element.type === "level"){// check the type key-value of the gameItems object to determine which objects to manifest
+        createLevel(element.x, element.y, element.speed, element.health);// if the condition is true it will call the revelent function
+    }
+    if (element.type === "reward"){// check the type key-value of the gameItems object to determine which objects to manifest
+      createReward(element.x, element.y, element.speed, element.health);// if the condition is true it will call the revelent function
+  }
+      }
 
       //////////////////////////////////////////////
       // DO NOT EDIT CODE BELOW HERE
